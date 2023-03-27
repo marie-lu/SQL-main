@@ -1,0 +1,32 @@
+--Create a store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, section TEXT, price INTEGER, quantity INTEGER);
+
+INSERT INTO store VALUES (1, "apple", "produce", 1.99, 11);
+INSERT INTO store VALUES (2, "orange", "produce", 2.99, 12);
+INSERT INTO store VALUES (3, "pineapple", "produce", 3.99, 13);
+INSERT INTO store VALUES (4, "plum", "produce", 4.99, 14);
+INSERT INTO store VALUES (5, "pomegranate", "produce", 5.99, 15);
+INSERT INTO store VALUES (6, "chicken", "meat", 6.99, 16);
+INSERT INTO store VALUES (7, "beef", "meat", 7.99, 17);
+INSERT INTO store VALUES (8, "salmon", "meat", 8.99, 18);
+INSERT INTO store VALUES (9, "lobster", "meat", 9.99, 19);
+INSERT INTO store VALUES (10, "broccoli", "produce", 10.99, 20);
+INSERT INTO store VALUES (11, "okra", "produce", 11.99, 21);
+INSERT INTO store VALUES (12, "eggs", "dairy", 12.99, 22);
+INSERT INTO store VALUES (13, "detergent", "dry goods", 13.99, 23);
+INSERT INTO store VALUES (14, "storage bags", "dry goods", 14.99, 24);
+INSERT INTO store VALUES (15, "beer", "beverages", 15.99, 25);
+
+
+--Display database ordered by price
+
+SELECT * FROM store 
+ORDER BY price ASC;
+
+--Average price of item in produce section
+
+SELECT AVG(price) 
+FROM store
+WHERE section = "produce";
+

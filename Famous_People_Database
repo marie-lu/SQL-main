@@ -1,0 +1,46 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE celebs (id INTEGER PRIMARY KEY AUTOINCREMENT, fullname TEXT);
+    
+INSERT INTO celebs (fullname) VALUES ("Humphrey Bogart");
+INSERT INTO celebs (fullname) VALUES ("Lauren Bacall");
+INSERT INTO celebs (fullname) VALUES ("Richard Burton");
+INSERT INTO celebs (fullname) VALUES ("Elizabeth Taylor");
+
+
+CREATE table movies (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  celeb_id INTEGER);
+    
+INSERT INTO movies (title, celeb_id) VALUES ("To Have and Have Not", 1);
+INSERT INTO movies (title, celeb_id) VALUES ("To Have and Have Not", 2);
+INSERT INTO movies (title, celeb_id) VALUES ("The Big Sleep", 1);
+INSERT INTO movies (title, celeb_id) VALUES ("The Big Sleep", 2);
+INSERT INTO movies (title, celeb_id) VALUES ("Dark Passage", 1);
+INSERT INTO movies (title, celeb_id) VALUES ("Dark Passage", 2);
+INSERT INTO movies (title, celeb_id) VALUES ("Key Largo", 1);
+INSERT INTO movies (title, celeb_id) VALUES ("Key Largo", 2);
+INSERT INTO movies (title, celeb_id) VALUES ("Who's Afraid of Virginia Woolf?", 3);
+INSERT INTO movies (title, celeb_id) VALUES ("Who's Afraid of Virginia Woolf?", 4);
+
+CREATE table marriages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  celeb1_id INTEGER,
+  celeb2_id INTEGER);
+
+INSERT INTO marriages (celeb1_id, celeb2_id) VALUES (1, 2);
+INSERT INTO marriages (celeb1_id, celeb2_id) VALUES (3, 4);
+
+SELECT c.fullname, m.title
+FROM celebs c
+  JOIN movies m
+  ON c.id = m.celeb_id
+  ORDER BY c.fullname DESC;
+    
+SELECT a.fullname, b.fullname
+FROM marriages m
+  JOIN celebs a
+  ON m.celeb1_id = a.id
+  JOIN celebs b
+  ON m.celeb2_id = b.id;

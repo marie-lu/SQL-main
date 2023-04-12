@@ -59,7 +59,7 @@ GROUP BY Product;
 SELECT COUNT(DISTINCT customers.acctnum),
   AVG(Quantity * price)
 FROM BIT_DB.FebSales Feb
-  LEFT JOIN BIT_DB.customers customers ON Feb.orderID = customers.orderID
+  LEFT JOIN BIT_DB.customers customers ON Feb.orderID = customers.order_id
 WHERE Feb.Quantity > 2
   AND LENGTH(orderID) = 6
   AND orderID <> 'Order ID';
@@ -87,20 +87,41 @@ HAVING orders >= 3;
 
 -- How many of each type of headphone were sold in February?
 
-
+SELECT Product,
+  SUM(quantity) AS quantity
+FROM BIT_DB.FebSales
+WHERE Product LIKE '%headphone%'
+GROUP BY Product;
 
 
 -- What was the average amount spent per account in February?
 
-
+SELECT AVG(Quantity * price)
+FROM BIT_DB.FebSales Feb
+  LEFT JOIN BIT_DB.customers customers 
+  ON Feb.orderID = customers.order_id
+WHERE LENGTH(orderID) = 6
+  AND orderID <> 'Order ID';
 
 
 -- What was the average quantity of products purchased per account in February?
 
-
+SELECT SUM(quantity) / COUNT(customers.acctnum)
+FROM BIT_DB.FebSales Feb
+  LEFT JOIN BIT_DB.customers customers ON Feb.orderID = customers.order_id
+WHERE LENGTH(orderID) = 6
+  AND orderID <> 'Order ID';
 
 
 -- Which product brought in the most revenue in January and how much revenue did it bring in total? 
+
+SELECT Product,
+  SUM(Quantity),
+  SUM(Quantity * price) AS revenue
+FROM BIT_DB.JanSales
+GROUP BY Product
+ORDER BY revenue DESC
+LIMIT 1;
 
 
 
